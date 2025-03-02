@@ -1,4 +1,7 @@
+import { useNavigate } from "react-router-dom";
+
 function WorkoutTable({ workouts, onDelete, handleOpen }) {
+    const navigate = useNavigate();
     return (
         <div className="overflow-x-auto mt-10">
             <table className="table table-zebra">
@@ -9,20 +12,32 @@ function WorkoutTable({ workouts, onDelete, handleOpen }) {
                 </thead>
                 <tbody>
                     {workouts.map((workout) => (
-                        <tr key={workout.id} className="hover">
+                        <tr
+                            key={workout.id}
+                            className="hover cursor-pointer"
+                            onClick={() => {
+                                navigate("/workout", {
+                                    state: { workoutId: workout.id },
+                                });
+                            }}
+                        >
                             <td>{workout.name}</td>
-                            <td>
+                            <td className="text-right space-x-5">
                                 <button
                                     className="btn btn-outline btn-warning"
-                                    onClick={() => handleOpen("edit", workout)}
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        handleOpen("edit", workout);
+                                    }}
                                 >
                                     Update
                                 </button>
-                            </td>
-                            <td>
                                 <button
                                     className="btn btn-outline btn-error"
-                                    onClick={() => onDelete(workout.id)}
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        onDelete(workout.id);
+                                    }}
                                 >
                                     Remove
                                 </button>

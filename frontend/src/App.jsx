@@ -5,6 +5,7 @@ import Register from "./pages/Register";
 import WorkoutPage from "./pages/WorkoutPage";
 import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
+import ExercisePage from "./pages/ExercisePage";
 
 function Logout() {
     localStorage.clear();
@@ -33,6 +34,14 @@ function App() {
                     element={
                         <ProtectedRoute>
                             <WorkoutPage />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/workout"
+                    element={
+                        <ProtectedRoute>
+                            <ExercisePage />
                         </ProtectedRoute>
                     }
                 />

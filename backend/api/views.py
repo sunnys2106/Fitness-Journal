@@ -17,7 +17,9 @@ class ExerciseCreate(generics.CreateAPIView):
     permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
-        serializer.save(author=self.request.user)
+        workout_id = self.kwargs.get("workout_id")
+        workout = Workout.objects.get(id=workout_id, author=self.request.user)
+        serializer.save(author=self.request.user, workout=workout)
 
 
 class ExerciseUpdate(generics.UpdateAPIView):
@@ -25,7 +27,8 @@ class ExerciseUpdate(generics.UpdateAPIView):
     permission_classes = [IsAuthenticated, IsOwner]
 
     def get_queryset(self):
-        return Exercise.objects.filter(author=self.request.user)
+        workout_id = self.kwargs.get("workout_id")
+        return Exercise.objects.filter(author=self.request.user, workout_id=workout_id)
 
 
 class ExerciseDelete(generics.DestroyAPIView):
@@ -33,7 +36,8 @@ class ExerciseDelete(generics.DestroyAPIView):
     permission_classes = [IsAuthenticated, IsOwner]
 
     def get_queryset(self):
-        return Exercise.objects.filter(author=self.request.user)
+        workout_id = self.kwargs.get("workout_id")
+        return Exercise.objects.filter(author=self.request.user, workout_id=workout_id)
 
 
 class ExerciseList(generics.ListAPIView):
@@ -41,7 +45,8 @@ class ExerciseList(generics.ListAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return Exercise.objects.filter(author=self.request.user)
+        workout_id = self.kwargs.get("workout_id")
+        return Exercise.objects.filter(workout_id=workout_id, author=self.request.user)
 
 
 class WorkoutCreate(generics.CreateAPIView):
