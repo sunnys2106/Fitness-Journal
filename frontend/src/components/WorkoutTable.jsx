@@ -17,7 +17,10 @@ function WorkoutTable({ workouts, onDelete, handleOpen }) {
                             className="hover cursor-pointer"
                             onClick={() => {
                                 navigate("/workout", {
-                                    state: { workoutId: workout.id },
+                                    state: {
+                                        workoutId: workout.id,
+                                        workoutName: workout.name,
+                                    },
                                 });
                             }}
                         >

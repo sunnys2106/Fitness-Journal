@@ -100,7 +100,7 @@ function WorkoutPage() {
             <Navbar
                 logout={logout}
                 handleOpen={handleFormOpen}
-                workoutMode={true}
+                workoutName={null}
             />
 
             <div>

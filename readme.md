@@ -8,6 +8,7 @@ Technologies Used
 -   **Backend**: Django, JWT for authentication.
 -   **Database**: SQLite
 
-![Image of the homepage](./screenshots/ss1.png?raw=true)
-![Image of form](./screenshots/ss2.png?raw=true)
+![Image of the workout page](./screenshots/ss4.png?raw=true)
+![Image of the exercise page](./screenshots/ss1.png?raw=true)
+![Image of edit exercise form](./screenshots/ss2.png?raw=true)
 ![Image of login form](./screenshots/ss3.png?raw=true)

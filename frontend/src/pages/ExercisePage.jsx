@@ -16,6 +16,7 @@ function ExercisePage() {
 
     const location = useLocation();
     const [workoutId, setWorkoutId] = useState(location.state?.workoutId);
+    const [workoutName, setWorkoutName] = useState(location.state?.workoutName);
 
     useEffect(() => {
         async function fetchData() {
@@ -125,7 +126,7 @@ function ExercisePage() {
             <Navbar
                 logout={logout}
                 handleOpen={handleFormOpen}
-                workoutMode={false}
+                workoutName={workoutName}
             />
 
             <div>

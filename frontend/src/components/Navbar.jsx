@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-function Navbar({ logout, handleOpen, workoutMode }) {
+function Navbar({ logout, handleOpen, workoutName }) {
     const navigate = useNavigate();
 
     return (
@@ -10,20 +10,25 @@ function Navbar({ logout, handleOpen, workoutMode }) {
                     className="btn btn-outline btn-success"
                     onClick={() => handleOpen("add")}
                 >
-                    {workoutMode ? "Create a Workout" : "Create an Exercise"}
+                    {workoutName ? "Create an Exercise" : "Create a Workout"}
                 </button>
             </div>
-            <div
-                className="navbar-center"
-                onClick={() => {
-                    navigate("/");
-                }}
-            >
+            <div className="navbar-center">
                 <p className="btn btn-ghost text-xl">
-                    {workoutMode ? "Fitness Journal" : "Back to Workouts"}
+                    {workoutName ? workoutName : "My Workouts"}
                 </p>
             </div>
-            <div className="navbar-end">
+            <div className="navbar-end space-x-5">
+                {workoutName ? (
+                    <button
+                        className="btn btn-outline"
+                        onClick={() => {
+                            navigate("/");
+                        }}
+                    >
+                        Back to My Workouts
+                    </button>
+                ) : null}
                 <button className="btn btn-outline btn-info" onClick={logout}>
                     Logout
                 </button>
