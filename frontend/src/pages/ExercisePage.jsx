@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import api from "../api";
-import Table from "../components/Table";
+import Table from "../components/ExerciseTable";
 import Navbar from "../components/Navbar";
 import ExerciseForm from "../components/ExerciseForm";
 import { useNavigate } from "react-router-dom";
