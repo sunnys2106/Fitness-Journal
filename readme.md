@@ -9,6 +9,6 @@ Technologies Used
 -   **Database**: SQLite
 
 ![Image of the workout page](./screenshots/ss4.png?raw=true)
-![Image of the exercise page](./screenshots/ss5.png?raw=true)
+![Image of the exercise page](./screenshots/ss6.png?raw=true)
 ![Image of edit exercise form](./screenshots/ss2.png?raw=true)
 ![Image of login form](./screenshots/ss3.png?raw=true)
