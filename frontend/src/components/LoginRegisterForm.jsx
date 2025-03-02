@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
 import LoadingIndicator from "./LoadingIndicator";
 
-function Form({ route, method }) {
+function LoginRegisterForm({ route, method }) {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -108,4 +108,4 @@ function Form({ route, method }) {
     );
 }
 
-export default Form;
+export default LoginRegisterForm;

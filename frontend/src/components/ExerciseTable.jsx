@@ -1,4 +1,4 @@
-function Table({ exercises, onDelete, handleOpen }) {
+function ExerciseTable({ exercises, onDelete, handleOpen }) {
     return (
         <div className="overflow-x-auto mt-10">
             <table className="table table-zebra">
@@ -45,4 +45,4 @@ function Table({ exercises, onDelete, handleOpen }) {
     );
 }
 
-export default Table;
+export default ExerciseTable;
