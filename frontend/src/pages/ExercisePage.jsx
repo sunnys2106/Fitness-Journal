@@ -112,7 +112,11 @@ function Home() {
 
     return (
         <div>
-            <Navbar logout={logout} handleOpen={handleFormOpen} />
+            <Navbar
+                logout={logout}
+                handleOpen={handleFormOpen}
+                workoutMode={false}
+            />
 
             <div>
                 <Table

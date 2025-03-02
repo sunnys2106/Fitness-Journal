@@ -5,7 +5,7 @@ import Navbar from "../components/Navbar";
 import WorkoutForm from "../components/WorkoutForm";
 import { useNavigate } from "react-router-dom";
 
-function Home() {
+function WorkoutPage() {
     const [workouts, setWorkouts] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
     const [modalMode, setModalMode] = useState("add");
@@ -123,4 +123,4 @@ function Home() {
     );
 }
 
-export default Home;
+export default WorkoutPage;

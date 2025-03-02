@@ -2,7 +2,7 @@ import "./App.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Home from "./pages/WorkoutPage";
+import WorkoutPage from "./pages/WorkoutPage";
 import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -24,7 +24,7 @@ function App() {
                     path="/"
                     element={
                         <ProtectedRoute>
-                            <Home />
+                            <WorkoutPage />
                         </ProtectedRoute>
                     }
                 />
@@ -32,7 +32,7 @@ function App() {
                     path="/home"
                     element={
                         <ProtectedRoute>
-                            <Home />
+                            <WorkoutPage />
                         </ProtectedRoute>
                     }
                 />
