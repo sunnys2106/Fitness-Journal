@@ -25,7 +25,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
-package-lock.json
 yarn.lock
 .pnpm-debug.log
 
@@ -79,14 +78,6 @@ temp/
 # Local files for debugging
 debug/
 local/
-
-# TailwindCSS
-tailwind.config.js
-postcss.config.js
-
-# NPM / Yarn lock files if you're using Yarn
-# yarn.lock
-# package-lock.json
 
 todo.txt
 
