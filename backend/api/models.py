@@ -20,7 +20,7 @@ class Exercise(models.Model):
     reps = models.IntegerField(
         validators=[MaxValueValidator(100), MinValueValidator(1)]
     )
-    notes = models.TextField()
+    notes = models.TextField(blank=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="exercises")
     workout = models.ForeignKey(
         Workout, on_delete=models.CASCADE, related_name="workout_exercises"
