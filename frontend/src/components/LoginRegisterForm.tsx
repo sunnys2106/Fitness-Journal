@@ -26,13 +26,12 @@ function LoginRegisterForm({
         e.preventDefault();
 
         try {
-            // const payload =
-            //     method === "login"
-            //         ? { username, password }
-            //         : { username, password, email };
+            const payload =
+                method === "login"
+                    ? { username, password }
+                    : { username, password, email };
 
-            // const res = await api.post(route, payload);
-            const res = await api.post(route, { username, password, email });
+            const res = await api.post(route, payload);
             if (method === "login") {
                 localStorage.setItem(ACCESS_TOKEN, res.data.access);
                 localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
@@ -65,17 +64,20 @@ function LoginRegisterForm({
                             onChange={(e) => setUsername(e.target.value)}
                         />
                     </label>
-                    <label className="my-4 input input-bordered flex items-center gap-2">
-                        <div className="label">
-                            <span className="label-text">Email</span>
-                        </div>
-                        <input
-                            className="form-input"
-                            type="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
-                    </label>
+                    {method === "register" && (
+                        <label className="my-4 input input-bordered flex items-center gap-2">
+                            <div className="label">
+                                <span className="label-text">Email</span>
+                            </div>
+                            <input
+                                className="form-input"
+                                type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                        </label>
+                    )}
+
                     <label className="my-4 input input-bordered flex items-center gap-2">
                         <div className="label">
                             <span className="label-text">Password</span>
