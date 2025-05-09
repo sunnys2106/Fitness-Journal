@@ -1,6 +1,6 @@
 import LoginRegisterForm from "../components/LoginRegisterForm";
 
-function Register() {
+function Register(): JSX.Element {
     return <LoginRegisterForm route="/api/user/register/" method="register" />;
 }
 

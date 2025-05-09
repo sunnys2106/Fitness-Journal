@@ -1,6 +1,6 @@
 import LoginRegisterForm from "../components/LoginRegisterForm";
 
-function Login() {
+function Login(): JSX.Element {
     return <LoginRegisterForm route="/api/token/" method="login" />;
 }
 

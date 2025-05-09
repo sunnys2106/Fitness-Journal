@@ -6,17 +6,32 @@ import ExerciseForm from "../components/ExerciseForm";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
-function ExercisePage() {
-    const [exercises, setExercises] = useState([]);
-    const [modalOpen, setModalOpen] = useState(false);
-    const [modalMode, setModalMode] = useState("add");
-    const [currentExercise, setCurrentExercise] = useState("");
+type Exercise = {
+    id: number;
+    name: string;
+    weight: number;
+    sets: number;
+    reps: number;
+    notes: string;
+};
+
+type LocationState = {
+    workoutId: string;
+    workoutName: string;
+};
+
+function ExercisePage(): JSX.Element {
+    const [exercises, setExercises] = useState<Exercise[]>([]);
+    const [modalOpen, setModalOpen] = useState<boolean>(false);
+    const [modalMode, setModalMode] = useState<"add" | "edit">("add");
+    const [currentExercise, setCurrentExercise] = useState<Exercise | null>(
+        null
+    );
 
     const navigate = useNavigate();
 
     const location = useLocation();
-    const [workoutId, setWorkoutId] = useState(location.state?.workoutId);
-    const [workoutName, setWorkoutName] = useState(location.state?.workoutName);
+    const { workoutId, workoutName } = location.state as LocationState;
 
     useEffect(() => {
         async function fetchData() {
@@ -34,7 +49,7 @@ function ExercisePage() {
         }
     };
 
-    const deleteExercise = async (id) => {
+    const deleteExercise = async (id: number) => {
         try {
             const res = api.delete(
                 `/api/workouts/${workoutId}/exercises/delete/${id}/`
@@ -49,7 +64,7 @@ function ExercisePage() {
         }
     };
 
-    const updateExercise = async (exercise, id) => {
+    const updateExercise = async (exercise: Exercise, id: number) => {
         try {
             const res = api.put(
                 `/api/workouts/${workoutId}/exercises/update/${id}/`,
@@ -81,7 +96,7 @@ function ExercisePage() {
         }
     };
 
-    const createExercise = async (exercise) => {
+    const createExercise = async (exercise: Exercise) => {
         try {
             const res = api.post(
                 `/api/workouts/${workoutId}/exercises/create/`,
@@ -100,7 +115,7 @@ function ExercisePage() {
         }
     };
 
-    const handleSubmit = async (exercise, id) => {
+    const handleSubmit = async (exercise: Exercise, id: number) => {
         if (modalMode === "add") {
             await createExercise(exercise);
         } else {
@@ -113,7 +128,7 @@ function ExercisePage() {
         navigate("/login");
     };
 
-    const handleFormOpen = (mode, exercise) => {
+    const handleFormOpen = (mode: "add" | "edit", exercise: Exercise) => {
         setModalOpen(true);
         setModalMode(mode);
         if (exercise) {
