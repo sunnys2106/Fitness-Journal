@@ -43,7 +43,7 @@ function ExercisePage(): JSX.Element {
 
     const deleteExercise = async (id: number) => {
         try {
-            const res = api.delete(
+            const res = await api.delete(
                 `/api/workouts/${workoutId}/exercises/delete/${id}/`
             );
             alert("Exercise deleted");
@@ -58,7 +58,7 @@ function ExercisePage(): JSX.Element {
 
     const updateExercise = async (exercise: Exercise, id: number) => {
         try {
-            const res = api.put(
+            const res = await api.put(
                 `/api/workouts/${workoutId}/exercises/update/${id}/`,
                 {
                     name: exercise.name,
@@ -90,7 +90,7 @@ function ExercisePage(): JSX.Element {
 
     const createExercise = async (exercise: Exercise) => {
         try {
-            const res = api.post(
+            const res = await api.post(
                 `/api/workouts/${workoutId}/exercises/create/`,
                 {
                     name: exercise.name,
