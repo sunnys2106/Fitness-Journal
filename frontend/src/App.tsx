@@ -7,17 +7,17 @@ import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
 import ExercisePage from "./pages/ExercisePage";
 
-function Logout() {
+function Logout(): JSX.Element {
     localStorage.clear();
     return <Navigate to="/login" />;
 }
 
-function RegisterAndLogout() {
+function RegisterAndLogout(): JSX.Element {
     localStorage.clear();
     return <Register />;
 }
 
-function App() {
+function App(): JSX.Element {
     return (
         <BrowserRouter>
             <Routes>
