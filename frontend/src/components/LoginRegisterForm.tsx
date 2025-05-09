@@ -1,23 +1,37 @@
 import { useState } from "react";
 import api from "../api";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
 import LoadingIndicator from "./LoadingIndicator";
 
-function LoginRegisterForm({ route, method }) {
-    const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+type LoginRegisterFormProps = {
+    route: string;
+    method: "login" | "register";
+};
 
-    const [loading, setLoading] = useState(false);
+function LoginRegisterForm({
+    route,
+    method,
+}: LoginRegisterFormProps): JSX.Element {
+    const [username, setUsername] = useState<string>("");
+    const [email, setEmail] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
+
+    const [loading, setLoading] = useState<boolean>(false);
 
     const navigate = useNavigate();
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         setLoading(true);
         e.preventDefault();
 
         try {
+            // const payload =
+            //     method === "login"
+            //         ? { username, password }
+            //         : { username, password, email };
+
+            // const res = await api.post(route, payload);
             const res = await api.post(route, { username, password, email });
             if (method === "login") {
                 localStorage.setItem(ACCESS_TOKEN, res.data.access);
@@ -26,8 +40,8 @@ function LoginRegisterForm({ route, method }) {
             } else {
                 navigate("/login");
             }
-        } catch (error) {
-            alert(error);
+        } catch (error: any) {
+            alert(error?.response?.data?.detail || "An error occurred");
         } finally {
             setLoading(false);
         }
@@ -77,29 +91,37 @@ function LoginRegisterForm({ route, method }) {
                         {loading && <LoadingIndicator />}
                     </div>
                     <div className="mt-4 w-full flex justify-center">
-                        <button className="btn btn-wide btn-outline btn-info">
-                            {method === "login" ? "Login" : "Register"}
+                        <button
+                            className="btn btn-wide btn-outline btn-info"
+                            type="submit"
+                            disabled={loading}
+                        >
+                            {loading
+                                ? "Please wait..."
+                                : method === "login"
+                                ? "Login"
+                                : "Register"}
                         </button>
                     </div>
                     {method === "login" ? (
                         <p className="text-center mt-4">
                             Don't have an account?{" "}
-                            <a
-                                href="/register"
+                            <Link
+                                to="/register"
                                 className="text-blue-500 underline"
                             >
                                 Register here
-                            </a>
+                            </Link>
                         </p>
                     ) : (
                         <p className="text-center mt-4">
                             Already have an account?{" "}
-                            <a
-                                href="/login"
+                            <Link
+                                to="/login"
                                 className="text-blue-500 underline"
                             >
                                 Login here
-                            </a>
+                            </Link>
                         </p>
                     )}
                 </form>

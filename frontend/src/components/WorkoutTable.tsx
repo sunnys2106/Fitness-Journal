@@ -1,6 +1,17 @@
 import { useNavigate } from "react-router-dom";
+import { Workout } from "../types";
 
-function WorkoutTable({ workouts, onDelete, handleOpen }) {
+type WorkoutTableProps = {
+    workouts: Workout[];
+    onDelete: (id: number) => Promise<void>;
+    handleOpen: (mode: "add" | "edit", workout?: Workout) => void;
+};
+
+function WorkoutTable({
+    workouts,
+    onDelete,
+    handleOpen,
+}: WorkoutTableProps): JSX.Element {
     const navigate = useNavigate();
     return (
         <div className="overflow-x-auto mt-10">

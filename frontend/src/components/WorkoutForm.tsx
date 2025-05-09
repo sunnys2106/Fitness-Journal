@@ -1,24 +1,42 @@
 import { useState, useEffect } from "react";
+import { Workout } from "../types";
 
-function WorkoutForm({ workout, mode, isOpen, onClose, onSubmit }) {
-    const [id, setId] = useState("");
-    const [name, setName] = useState("");
+type WorkoutFormProps = {
+    workout: Workout | null;
+    mode: "add" | "edit";
+    isOpen: boolean;
+    onClose: () => void;
+    onSubmit: (workout: Workout, id: number) => Promise<void>;
+};
+
+function WorkoutForm({
+    workout,
+    mode,
+    isOpen,
+    onClose,
+    onSubmit,
+}: WorkoutFormProps): JSX.Element {
+    const [id, setId] = useState<number>(-1); //-1 probably needs change
+    const [name, setName] = useState<string>("");
 
     useEffect(() => {
         if (mode === "edit" && workout) {
-            setId(workout.id);
+            if (workout.id) {
+                setId(workout.id);
+            }
             setName(workout.name);
         } else {
             setName("");
         }
     }, [mode, workout]);
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         try {
             const workout = {
                 name: name,
+                id: -1, //dummy var for ts: needs fix
             };
             setName("");
             await onSubmit(workout, id);

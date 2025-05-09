@@ -1,12 +1,27 @@
 import { useState, useEffect } from "react";
+import { Exercise } from "../types";
 
-function ExerciseForm({ exercise, mode, isOpen, onClose, onSubmit }) {
-    const [id, setId] = useState("");
-    const [name, setName] = useState("");
-    const [weight, setWeight] = useState("");
-    const [sets, setSets] = useState("");
-    const [reps, setReps] = useState("");
-    const [notes, setNotes] = useState("");
+type ExerciseFormProps = {
+    exercise: Exercise | null;
+    mode: "add" | "edit";
+    isOpen: boolean;
+    onClose: () => void;
+    onSubmit: (exercise: Exercise, id: number) => Promise<void>;
+};
+
+function ExerciseForm({
+    exercise,
+    mode,
+    isOpen,
+    onClose,
+    onSubmit,
+}: ExerciseFormProps): JSX.Element {
+    const [id, setId] = useState<number>(-1);
+    const [name, setName] = useState<string>("");
+    const [weight, setWeight] = useState<number>(0);
+    const [sets, setSets] = useState<number>(0);
+    const [reps, setReps] = useState<number>(0);
+    const [notes, setNotes] = useState<string>("");
 
     useEffect(() => {
         if (mode === "edit" && exercise) {
@@ -18,14 +33,14 @@ function ExerciseForm({ exercise, mode, isOpen, onClose, onSubmit }) {
             setNotes(exercise.notes);
         } else {
             setName("");
-            setWeight("");
-            setSets("");
-            setReps("");
+            setWeight(0);
+            setSets(0);
+            setReps(0);
             setNotes("");
         }
     }, [mode, exercise]);
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         try {
@@ -35,11 +50,12 @@ function ExerciseForm({ exercise, mode, isOpen, onClose, onSubmit }) {
                 sets: sets,
                 reps: reps,
                 notes: notes,
+                id: -1, //dummy var for ts: needs fix
             };
             setName("");
-            setWeight("");
-            setSets("");
-            setReps("");
+            setWeight(0);
+            setSets(0);
+            setReps(0);
             setNotes("");
             await onSubmit(exercise, id);
         } catch (err) {
@@ -86,7 +102,7 @@ function ExerciseForm({ exercise, mode, isOpen, onClose, onSubmit }) {
                             required
                             value={weight}
                             onChange={(e) => {
-                                setWeight(e.target.value);
+                                setWeight(Number(e.target.value));
                             }}
                         />
                     </label>
@@ -100,7 +116,7 @@ function ExerciseForm({ exercise, mode, isOpen, onClose, onSubmit }) {
                             required
                             value={sets}
                             onChange={(e) => {
-                                setSets(e.target.value);
+                                setSets(Number(e.target.value));
                             }}
                         />
                     </label>
@@ -114,7 +130,7 @@ function ExerciseForm({ exercise, mode, isOpen, onClose, onSubmit }) {
                             required
                             value={reps}
                             onChange={(e) => {
-                                setReps(e.target.value);
+                                setReps(Number(e.target.value));
                             }}
                         />
                     </label>

@@ -1,6 +1,17 @@
 import { useNavigate } from "react-router-dom";
+import { Exercise, Workout } from "../types";
 
-function Navbar({ logout, handleOpen, workoutName }) {
+type NavbarProps<T> = {
+    logout: () => void;
+    handleOpen: (mode: "add" | "edit", item?: T) => void;
+    workoutName: string | null;
+};
+
+function Navbar<T>({
+    logout,
+    handleOpen,
+    workoutName,
+}: NavbarProps<T>): JSX.Element {
     const navigate = useNavigate();
 
     return (

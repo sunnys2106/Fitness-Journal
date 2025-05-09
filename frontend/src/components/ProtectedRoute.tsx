@@ -2,16 +2,25 @@ import { Navigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import api from "../api";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
-import { useState, useEffect } from "react";
+import { useState, useEffect, ReactNode } from "react";
 
-function ProtectedRoute({ children }) {
-    const [isAuthorized, setIsAuthorized] = useState(null);
+type ProtectedRouteProps = {
+    children: ReactNode;
+};
+
+type DecodedToken = {
+    exp: number;
+    [key: string]: any;
+};
+
+function ProtectedRoute({ children }: ProtectedRouteProps): JSX.Element {
+    const [isAuthorized, setIsAuthorized] = useState<boolean | null>(null);
 
     useEffect(() => {
         auth().catch(() => setIsAuthorized(false));
     }, []);
 
-    const refreshToken = async () => {
+    const refreshToken = async (): Promise<void> => {
         const refreshToken = localStorage.getItem(REFRESH_TOKEN);
         try {
             const res = await api.post("/api/token/refresh/", {
@@ -29,13 +38,13 @@ function ProtectedRoute({ children }) {
         }
     };
 
-    const auth = async () => {
+    const auth = async (): Promise<void> => {
         const token = localStorage.getItem(ACCESS_TOKEN);
         if (!token) {
             setIsAuthorized(false);
             return;
         }
-        const decoded = jwtDecode(token);
+        const decoded = jwtDecode<DecodedToken>(token);
         const tokenExpiration = decoded.exp;
         const now = Date.now() / 1000;
 
@@ -50,7 +59,7 @@ function ProtectedRoute({ children }) {
         return <div>Loading...</div>;
     }
 
-    return isAuthorized ? children : <Navigate to="/login" />;
+    return isAuthorized ? <>{children}</> : <Navigate to="/login" />;
 }
 
 export default ProtectedRoute;

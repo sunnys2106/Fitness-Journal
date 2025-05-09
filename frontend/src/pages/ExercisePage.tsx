@@ -5,15 +5,7 @@ import Navbar from "../components/Navbar";
 import ExerciseForm from "../components/ExerciseForm";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-
-type Exercise = {
-    id: number;
-    name: string;
-    weight: number;
-    sets: number;
-    reps: number;
-    notes: string;
-};
+import { Exercise, Workout } from "../types";
 
 type LocationState = {
     workoutId: string;
@@ -128,7 +120,7 @@ function ExercisePage(): JSX.Element {
         navigate("/login");
     };
 
-    const handleFormOpen = (mode: "add" | "edit", exercise: Exercise) => {
+    const handleFormOpen = (mode: "add" | "edit", exercise?: Exercise) => {
         setModalOpen(true);
         setModalMode(mode);
         if (exercise) {
@@ -147,7 +139,6 @@ function ExercisePage(): JSX.Element {
             <div>
                 <ExerciseTable
                     exercises={exercises}
-                    onUpdate={updateExercise}
                     onDelete={deleteExercise}
                     handleOpen={handleFormOpen}
                 />

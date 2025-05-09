@@ -1,4 +1,16 @@
-function ExerciseTable({ exercises, onDelete, handleOpen }) {
+import { Exercise } from "../types";
+
+type ExerciseTable = {
+    exercises: Exercise[];
+    onDelete: (id: number) => Promise<void>;
+    handleOpen: (mode: "add" | "edit", exercise?: Exercise) => void;
+};
+
+function ExerciseTable({
+    exercises,
+    onDelete,
+    handleOpen,
+}: ExerciseTable): JSX.Element {
     return (
         <div className="overflow-x-auto mt-10">
             <table className="table table-zebra">

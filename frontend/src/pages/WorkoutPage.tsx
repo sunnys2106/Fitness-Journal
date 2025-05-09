@@ -4,11 +4,7 @@ import WorkoutTable from "../components/WorkoutTable";
 import Navbar from "../components/Navbar";
 import WorkoutForm from "../components/WorkoutForm";
 import { useNavigate } from "react-router-dom";
-
-type Workout = {
-    id: number;
-    name: string;
-};
+import { Workout } from "../types";
 
 function WorkoutPage(): JSX.Element {
     const [workouts, setWorkouts] = useState<Workout[]>([]);
@@ -79,15 +75,11 @@ function WorkoutPage(): JSX.Element {
         }
     };
 
-    const handleSubmit = async (workout: Workout, id?: number) => {
+    const handleSubmit = async (workout: Workout, id: number) => {
         if (modalMode === "add") {
             await createWorkout(workout);
         } else {
-            if (id) {
-                await updateWorkout(workout, id);
-            } else {
-                alert("Error. Please try again");
-            }
+            await updateWorkout(workout, id);
         }
     };
 
@@ -115,7 +107,6 @@ function WorkoutPage(): JSX.Element {
             <div>
                 <WorkoutTable
                     workouts={workouts}
-                    onUpdate={updateWorkout}
                     onDelete={deleteWorkout}
                     handleOpen={handleFormOpen}
                 />
