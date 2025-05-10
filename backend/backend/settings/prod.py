@@ -3,7 +3,8 @@ import os
 import dj_database_url
 
 
-DATABASES = {"default": dj_database_url.parse(os.environ.get("DATABASE_URL"))}
+# DATABASE_URL = os.environ.get("DATABASE_URL")
+# DATABASES = {"default": dj_database_url.parse(DATABASE_URL)}
 
 CORS_ALLOWED_ORIGINS = [
     "https://fitness-journal-mu.vercel.app",
