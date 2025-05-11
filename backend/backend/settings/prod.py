@@ -5,6 +5,17 @@ import dj_database_url
 
 # DATABASE_URL = os.environ.get("DATABASE_URL")
 # DATABASES = {"default": dj_database_url.parse(DATABASE_URL)}
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.getenv("POSTGRES_DB"),
+        "USER": os.getenv("POSTGRES_USER"),
+        "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
+        "HOST": os.getenv("POSTGRES_HOST"),
+        "PORT": os.getenv("POSTGRES_PORT"),
+    }
+}
+
 
 CORS_ALLOWED_ORIGINS = [
     "https://fitness-journal-mu.vercel.app",
