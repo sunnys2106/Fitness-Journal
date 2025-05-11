@@ -19,6 +19,7 @@ DATABASES = {
 
 CORS_ALLOWED_ORIGINS = [
     "https://fitness-journal-mu.vercel.app",
+    "http://fitness-journal-mu.vercel.app",
 ]
 
 # SECURITY WARNING: keep the secret key used in production secret!
