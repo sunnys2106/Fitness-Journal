@@ -6,9 +6,10 @@ Technologies Used
 
 -   **Frontend**: React, Vite, axios, Tailwind CSS and daisyUI
 -   **Backend**: Django, JWT for authentication.
--   **Database**: SQLite
+-   **Database**: PostgreSQL
+-   **Deployment and Hosting**: Vercel, Docker, AWS EC2, Nginx
 
-Check it out [here](https://fitness-journal-mu.vercel.app/)
+Check it out at [sunnyshen.app](https://www.sunnyshen.app)
 
 ![Image of the workout page](./screenshots/ss4.png?raw=true)
 ![Image of the exercise page](./screenshots/ss6.png?raw=true)
