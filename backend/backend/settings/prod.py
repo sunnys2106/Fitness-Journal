@@ -21,6 +21,7 @@ CORS_ALLOWED_ORIGINS = [
     "https://fitness-journal-mu.vercel.app",
     "http://fitness-journal-mu.vercel.app",
     "https://sunnyshen.app",
+    "https://www.sunnyshen.app",
 ]
 
 # SECURITY WARNING: keep the secret key used in production secret!
