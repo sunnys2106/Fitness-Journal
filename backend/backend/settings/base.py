@@ -22,18 +22,18 @@ LOGGING = {
     "root": {
         "handlers": ["console"],
         "level": (
-            "DEBUG" if os.environ.get("DEBUG", "false").lower() == "true" else "INFO"
+            "INFO" if os.environ.get("DEBUG", "false").lower() == "true" else "INFO"
         ),
     },
     "loggers": {
         "django.request": {
             "handlers": ["console"],
-            "level": "DEBUG",  # Can also use INFO
+            "level": "INFO",  # Can also use INFO
             "propagate": False,
         },
         "django": {
             "handlers": ["console"],
-            "level": "DEBUG",
+            "level": "INFO",
         },
     },
 }
