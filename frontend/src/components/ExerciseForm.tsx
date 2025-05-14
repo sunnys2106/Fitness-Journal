@@ -44,20 +44,23 @@ function ExerciseForm({
         e.preventDefault();
 
         try {
-            const exercise = {
-                name: name,
-                weight: weight,
-                sets: sets,
-                reps: reps,
-                notes: notes,
-                id: -1, //dummy var for ts: needs fix
-            };
-            setName("");
-            setWeight(0);
-            setSets(0);
-            setReps(0);
-            setNotes("");
-            await onSubmit(exercise, id);
+            if (!showNameError) {
+                setNameTouched(false);
+                const exercise = {
+                    name: name,
+                    weight: weight,
+                    sets: sets,
+                    reps: reps,
+                    notes: notes,
+                    id: -1, //dummy var for ts: needs fix
+                };
+                setName("");
+                setWeight(0);
+                setSets(0);
+                setReps(0);
+                setNotes("");
+                await onSubmit(exercise, id);
+            }
         } catch (err) {
             console.error("Error submitting data", err);
         }
@@ -80,7 +83,10 @@ function ExerciseForm({
                     <button
                         type="button"
                         className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-                        onClick={onClose}
+                        onClick={() => {
+                            setNameTouched(false);
+                            onClose();
+                        }}
                     >
                         ✕
                     </button>
@@ -119,6 +125,7 @@ function ExerciseForm({
                             type="number"
                             className="grow"
                             required
+                            min={0}
                             value={weight}
                             onChange={(e) => {
                                 setWeight(Number(e.target.value));
@@ -133,6 +140,7 @@ function ExerciseForm({
                             type="number"
                             className="grow"
                             required
+                            min={0}
                             value={sets}
                             onChange={(e) => {
                                 setSets(Number(e.target.value));
@@ -147,6 +155,7 @@ function ExerciseForm({
                             type="number"
                             className="grow"
                             required
+                            min={0}
                             value={reps}
                             onChange={(e) => {
                                 setReps(Number(e.target.value));

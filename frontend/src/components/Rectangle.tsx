@@ -13,5 +13,4 @@ function Rectangle({ children }: RectangleProps): JSX.Element {
         </div>
     );
 }
-
 export default Rectangle;

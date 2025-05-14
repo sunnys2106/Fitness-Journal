@@ -1,4 +1,6 @@
 import { Exercise } from "../types";
+import ExerciseForm from "./ExerciseForm";
+import duckSvg from "../assets/duck.svg";
 
 type ExerciseTable = {
     exercises: Exercise[];
@@ -13,46 +15,61 @@ function ExerciseTable({
 }: ExerciseTable): JSX.Element {
     return (
         <div className="overflow-x-auto mt-10 rounded-2xl">
-            <table className="table table-zebra rounded-2xl">
-                <thead>
-                    <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col">Weight</th>
-                        <th scope="col">Sets</th>
-                        <th scope="col">Reps</th>
-                        <th scope="col">Additional Notes</th>
-                        <th scope="col">Update Exercise</th>
-                        <th scope="col">Remove Exercise</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {exercises.map((exercise) => (
-                        <tr key={exercise.id} className="hover">
-                            <td>{exercise.name}</td>
-                            <td>{exercise.weight}</td>
-                            <td>{exercise.sets}</td>
-                            <td>{exercise.reps}</td>
-                            <td>{exercise.notes}</td>
-                            <td>
-                                <button
-                                    className="btn btn-outline btn-warning"
-                                    onClick={() => handleOpen("edit", exercise)}
-                                >
-                                    Update
-                                </button>
-                            </td>
-                            <td>
-                                <button
-                                    className="btn btn-outline btn-error"
-                                    onClick={() => onDelete(exercise.id)}
-                                >
-                                    Remove
-                                </button>
-                            </td>
+            {exercises.length === 0 ? (
+                <div className="flex flex-col items-center justify-center h-60 space-y-4">
+                    <p className="text-2xl font-semibold text-gray-600">
+                        Add an Exercise!
+                    </p>
+                    <img src={duckSvg} alt="My icon" className="w-16 h-16" />
+                </div>
+            ) : (
+                <table className="table table-zebra rounded-2xl">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Weight</th>
+                            <th scope="col">Sets</th>
+                            <th scope="col">Reps</th>
+                            <th scope="col">Additional Notes</th>
+                            <th scope="col" className="text-right">
+                                Update Exercise
+                            </th>
+                            <th scope="col" className="text-right">
+                                Remove Exercise
+                            </th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {exercises.map((exercise) => (
+                            <tr key={exercise.id} className="hover">
+                                <td>{exercise.name}</td>
+                                <td>{exercise.weight}</td>
+                                <td>{exercise.sets}</td>
+                                <td>{exercise.reps}</td>
+                                <td>{exercise.notes}</td>
+                                <td className="text-right">
+                                    <button
+                                        className="btn btn-outline btn-warning"
+                                        onClick={() =>
+                                            handleOpen("edit", exercise)
+                                        }
+                                    >
+                                        Update
+                                    </button>
+                                </td>
+                                <td className="text-right">
+                                    <button
+                                        className="btn btn-outline btn-error"
+                                        onClick={() => onDelete(exercise.id)}
+                                    >
+                                        Remove
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            )}
         </div>
     );
 }

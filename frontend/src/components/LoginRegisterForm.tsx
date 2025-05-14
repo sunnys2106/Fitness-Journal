@@ -50,7 +50,8 @@ function LoginRegisterForm({
 
     const [usernameTouched, setusernameTouched] = useState(false);
     const isValidUsername = /^[A-Za-z0-9 -]{3,30}$/.test(username);
-    const showUsernameError = usernameTouched && !isValidUsername;
+    const showUsernameError =
+        method === "login" ? false : usernameTouched && !isValidUsername;
 
     const [emailTouched, setemailTouched] = useState(false);
     const isValidEmail = (
@@ -62,7 +63,8 @@ function LoginRegisterForm({
     const isValidPassword = (
         document.getElementById("passwordInput") as HTMLInputElement
     )?.checkValidity();
-    const showPasswordError = passwordTouched && !isValidPassword;
+    const showPasswordError =
+        method === "login" ? false : passwordTouched && !isValidPassword;
 
     return (
         <dialog id="my_modal_3" className="modal" open={true}>
