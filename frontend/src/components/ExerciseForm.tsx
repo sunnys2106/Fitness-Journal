@@ -64,6 +64,12 @@ function ExerciseForm({
         onClose();
     };
 
+    const [nameTouched, setNameTouched] = useState<boolean>(false);
+    const isValidName = (
+        document.getElementById("nameInput") as HTMLInputElement
+    )?.checkValidity();
+    const showNameError = nameTouched && !isValidName;
+
     return (
         <dialog id="my_modal_3" className="modal" open={isOpen}>
             <div className="modal-box">
@@ -78,20 +84,33 @@ function ExerciseForm({
                     >
                         ✕
                     </button>
-                    <label className="my-4 input input-bordered flex items-center gap-2">
+                    <label
+                        className={` input input-bordered flex items-center gap-2 ${
+                            showNameError ? "border-2 border-red-500" : ""
+                        }`}
+                    >
                         <div className="label">
                             <span className="label-text">Name</span>
                         </div>
                         <input
+                            id="nameInput"
                             type="text"
                             className="grow"
                             required
+                            minLength={1}
+                            maxLength={50}
+                            onBlur={() => setNameTouched(true)}
                             value={name}
                             onChange={(e) => {
                                 setName(e.target.value);
                             }}
                         />
                     </label>
+                    {showNameError && (
+                        <span className="text-red-500 text-sm ml-2">
+                            Enter a name between 1-50 characters long
+                        </span>
+                    )}
                     <label className="my-4 input input-bordered flex items-center gap-2">
                         <div className="label">
                             <span className="label-text">Weight</span>
@@ -136,7 +155,7 @@ function ExerciseForm({
                     </label>
                     <label className="form-control">
                         <div className="label">
-                            <span className="label-text">Notes</span>
+                            <span className="label-text">Notes (optional)</span>
                         </div>
                         <textarea
                             className="textarea textarea-bordered h-12"

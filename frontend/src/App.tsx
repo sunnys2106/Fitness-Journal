@@ -6,6 +6,7 @@ import WorkoutPage from "./pages/WorkoutPage";
 import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
 import ExercisePage from "./pages/ExercisePage";
+import Rectangle from "./components/Rectangle";
 
 function Logout(): JSX.Element {
     localStorage.clear();
@@ -24,25 +25,31 @@ function App(): JSX.Element {
                 <Route
                     path="/"
                     element={
-                        <ProtectedRoute>
-                            <WorkoutPage />
-                        </ProtectedRoute>
+                        <Rectangle>
+                            <ProtectedRoute>
+                                <WorkoutPage />
+                            </ProtectedRoute>
+                        </Rectangle>
                     }
                 />
                 <Route
                     path="/home"
                     element={
-                        <ProtectedRoute>
-                            <WorkoutPage />
-                        </ProtectedRoute>
+                        <Rectangle>
+                            <ProtectedRoute>
+                                <WorkoutPage />
+                            </ProtectedRoute>
+                        </Rectangle>
                     }
                 />
                 <Route
                     path="/workout"
                     element={
-                        <ProtectedRoute>
-                            <ExercisePage />
-                        </ProtectedRoute>
+                        <Rectangle>
+                            <ProtectedRoute>
+                                <ExercisePage />
+                            </ProtectedRoute>
+                        </Rectangle>
                     }
                 />
                 <Route path="/login" element={<Login />} />

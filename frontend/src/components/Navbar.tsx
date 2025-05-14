@@ -15,7 +15,7 @@ function Navbar<T>({
     const navigate = useNavigate();
 
     return (
-        <div className="navbar bg-base-100 mt-2">
+        <div className="navbar bg-base-100 mt-2 rounded-xl ">
             <div className="navbar-start">
                 <button
                     className="btn btn-outline btn-success"

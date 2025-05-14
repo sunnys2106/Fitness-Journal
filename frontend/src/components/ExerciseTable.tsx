@@ -12,8 +12,8 @@ function ExerciseTable({
     handleOpen,
 }: ExerciseTable): JSX.Element {
     return (
-        <div className="overflow-x-auto mt-10">
-            <table className="table table-zebra">
+        <div className="overflow-x-auto mt-10 rounded-2xl">
+            <table className="table table-zebra rounded-2xl">
                 <thead>
                     <tr>
                         <th scope="col">Name</th>
