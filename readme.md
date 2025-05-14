@@ -10,8 +10,3 @@ Technologies Used
 -   **Deployment and Hosting**: Vercel, Docker, AWS EC2, Nginx
 
 Check it out at [sunnyshen.app](https://www.sunnyshen.app)
-
-![Image of the workout page](./screenshots/ss4.png?raw=true)
-![Image of the exercise page](./screenshots/ss6.png?raw=true)
-![Image of edit exercise form](./screenshots/ss2.png?raw=true)
-![Image of login form](./screenshots/ss3.png?raw=true)
